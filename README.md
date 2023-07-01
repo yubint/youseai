@@ -1,7 +1,7 @@
 
 # YouseAI Project
 
-A project made for YouseAI internship
+A project made for YouseAI internship. It uses knox for token authentication, django_password_validators for password validation and email_validator for email validation
 
 
 ## API Reference
