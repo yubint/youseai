@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'api',
     'rest_framework',
     'knox',
+    'django_password_validators',
 ]
 
 MIDDLEWARE = [
@@ -96,12 +97,26 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            "min_length": 8,
+        }
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+    {
+        'NAME': 'django_password_validators.password_character_requirements.password_validation.PasswordCharacterValidator',
+        'OPTIONS': {
+            'min_length_digit': 1,
+            'min_length_alpha': 1,
+            'min_length_special': 1,
+            'min_length_lower': 1,
+            'min_length_upper': 1,
+            'special_characters': "~!@#$%^&*()_+{}\":;'[]"
+        }
     },
 ]
 
@@ -129,3 +144,9 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'api.User'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'knox.auth.TokenAuthentication'
+    ]
+}
